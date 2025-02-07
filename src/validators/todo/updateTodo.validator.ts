@@ -14,7 +14,7 @@ export const updateTodoValidator = () => {
       .withMessage("Description must be a string."),
     body("dueDate")
       .optional()
-      .isDate()
+      .isISO8601()
       .withMessage("Due date must be a valid date."),
     body("status")
       .optional()
