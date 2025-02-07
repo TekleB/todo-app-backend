@@ -1,6 +1,7 @@
 import { TodoEntity } from "../entities";
 import { AppDataSouce } from "../db";
 import { TodoData } from "../types";
+import { Not as TypeORMNot } from "typeorm";
 
 export const createTodo = async (data: TodoData): Promise<TodoEntity> => {
   const { title, dueDate, description, user } = data;
@@ -65,7 +66,7 @@ export const updateTodo = async (
   if (!todo) return null;
 
   const existingTodo = await todoRepository.findOne({
-    where: { title: data.title },
+    where: { title: data.title, id: Not(id), user: { uuid: userId } },
   });
 
   if (existingTodo) {
@@ -90,5 +91,8 @@ export const deleteTodo = async (
   if (!todo) return null;
 
   await todoRepository.remove(todo);
-  return todo.id;
+  return id;
 };
+function Not(id: string): string | import("typeorm").FindOperator<string> {
+  return TypeORMNot(id);
+}
