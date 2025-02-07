@@ -13,7 +13,7 @@ export class TodoEntity extends CoreEntity {
   @Column({ type: "varchar", nullable: true })
   description;
 
-  @Column({ type: "date", nullable: false })
+  @Column({ type: "timestamp", nullable: false })
   dueDate;
 
   @Column({ type: "boolean", nullable: false, default: true })

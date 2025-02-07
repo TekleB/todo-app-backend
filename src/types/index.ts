@@ -10,7 +10,7 @@ export type CreateTitleType = {
 };
 export interface TodoData {
   title: string;
-  dueDate: Date;
+  dueDate: string;
   description: string;
   user: UserEntity;
 }

@@ -14,7 +14,7 @@ export const addTodoValidator = () => {
     body("dueDate")
       .exists()
       .withMessage("Due date is required.")
-      .isDate()
+      .isISO8601()
       .withMessage("Due date must be a valid date."),
     body("status")
       .optional()
