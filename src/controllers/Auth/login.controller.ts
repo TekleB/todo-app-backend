@@ -13,7 +13,7 @@ const loginHandler = async (req, res) => {
   const compare = await comparePassword(password, findUser.password);
   if (!compare)
     return res
-      .status(httpStatus.UNAUTHORIZED)
+      .status(httpStatus.FORBIDDEN)
       .json("Username or Password is not correct");
   const token = generateToken(findUser.uuid);
   res.json({ token, username: findUser.username, uuid: findUser.uuid, email: findUser.email }).status(httpStatus.ACCEPTED);

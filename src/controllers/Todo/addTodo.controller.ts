@@ -19,7 +19,7 @@ const addTodoHandler = async (req, res) => {
         .json({ message: "Todo with this title already exists" });
     }
 
-    res.status(httpStatus.CREATED).json(newTodo);
+    res.status(httpStatus.CREATED).json(newTodo.id);
   } catch (error) {
     res
       .status(httpStatus.INTERNAL_SERVER_ERROR)

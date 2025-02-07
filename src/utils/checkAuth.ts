@@ -9,8 +9,9 @@ export const checkAuth = async (req, _res, next: NextFunction) => {
   try {
     const token = req.header("Authorization").replace("Bearer ", "");
     const { secretKey } = Env;
-    const { id } = jwt.verify(token, secretKey) as PayloadType;
-    const user = await userService.getOneUser({ id });
+    const { uuid } = jwt.verify(token, secretKey) as PayloadType;
+
+    const user = await userService.getOneUser({ uuid });
     req.user = { ...user };
     next();
   } catch {
