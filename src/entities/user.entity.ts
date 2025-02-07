@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 import { CoreEntity } from "./core.entity";
+import { TodoEntity } from './todo.entity';
 
 @Entity("user")
 export class UserEntity extends CoreEntity {
@@ -11,4 +12,6 @@ export class UserEntity extends CoreEntity {
   email;
   @Column({ type: "varchar", nullable: false })
   password;
+  @OneToMany(() => TodoEntity, (todo) => todo.userId)
+    todos: TodoEntity[];
 }
