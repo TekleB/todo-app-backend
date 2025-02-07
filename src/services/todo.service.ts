@@ -7,7 +7,7 @@ export const createTodo = async (data: TodoData): Promise<TodoEntity> => {
   const todoRepository = AppDataSouce.getRepository(TodoEntity);
 
   const existingTodo = await todoRepository.findOne({
-    where: { title },
+    where: { title, user: { uuid: user.uuid } },
   });
 
   if (existingTodo) return null;
