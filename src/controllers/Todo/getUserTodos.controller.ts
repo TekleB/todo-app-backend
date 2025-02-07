@@ -8,7 +8,18 @@ const getUserTodosHandler = async (req, res) => {
 
   const todos = await todoService.getUserTodos(uuid);
 
-  res.status(httpStatus.OK).json(todos);
+  const filteredTodos = todos.map(todo => ({
+    title: todo.title,
+    description: todo.description,
+    dueDate: todo.dueDate,
+    id: todo.id,
+    updatedAt: todo.updatedAt,
+    status: todo.status,
+    createdAt: todo.createdAt,
+    userId: todo.user.uuid,
+  }));
+
+  res.status(httpStatus.OK).json(filteredTodos);
 };
 
 export const getUserTodosController = errorHandlerWrapper(getUserTodosHandler);
