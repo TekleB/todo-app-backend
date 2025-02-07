@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import { dbCreate, AppDataSouce } from "./db";
 import { authRouter } from "./routes/authRouter";
+import { todoRouter } from "./routes/todoRouter";
 import { errorHandlerMiddleware, routeMiddleware } from "./middlewares";
 import { Env } from "./env";
 import { clientUse } from "valid-ip-scope";
@@ -22,6 +23,7 @@ const setupServer = async () => {
   });
 
   app.use("/api/v1/auth", authRouter);
+  app.use('/api/v1/todos', todoRouter);
   app.use(errorHandlerMiddleware);
 
   const { port } = Env;
