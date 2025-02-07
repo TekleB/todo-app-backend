@@ -11,7 +11,7 @@ export const AppDataSouce = new DataSource({
   password: Env.password,
   port: Env.dbPort,
   logging: false,
-  synchronize: false,
+  synchronize: true,
   entities: [UserEntity,TodoEntity],
   entitySkipConstructor: true,
   namingStrategy: new SnakeNamingStrategy(),
