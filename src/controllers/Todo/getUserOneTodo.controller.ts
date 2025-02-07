@@ -11,7 +11,16 @@ const getUserOneTodoHandler = async (req, res) => {
 
   if (!todo) return res.status(httpStatus.NOT_FOUND).json("Todo not found");
 
-  res.status(httpStatus.OK).json(todo);
+  res.status(httpStatus.OK).json({
+    title: todo.title,
+    description: todo.description,
+    dueDate: todo.dueDate,
+    id: todo.id,
+    updatedAt: todo.updatedAt,
+    status: todo.status,
+    createdAt: todo.createdAt,
+    userId: todo.user.uuid,
+  });
 };
 
 export const getUserOneTodoController = errorHandlerWrapper(

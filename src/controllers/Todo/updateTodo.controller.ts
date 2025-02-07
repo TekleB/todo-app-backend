@@ -22,7 +22,7 @@ const updateTodoHandler = async (req, res) => {
         .json({ message: "Todo not found or not authorized" });
     }
 
-    res.status(httpStatus.OK).json(updatedTodo);
+    res.status(httpStatus.OK).json(updatedTodo.id);
   } catch (error) {
     if ((error as Error).message === "Todo with this title already exists") {
       return res
