@@ -1,7 +1,7 @@
 import { UserEntity } from "../entities";
 
 export type PayloadType = {
-  id: string;
+  uuid: string;
 };
 
 export type CreateTitleType = {
@@ -9,10 +9,8 @@ export type CreateTitleType = {
   userId: UserEntity;
 };
 export interface TodoData {
-    title: string;
-    dueDate: Date;
-    description: string;
-    user: {
-        uuid: string;
-    };
+  title: string;
+  dueDate: Date;
+  description: string;
+  user: UserEntity;
 }

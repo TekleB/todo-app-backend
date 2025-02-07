@@ -16,7 +16,7 @@ export const createTodo = async (data: TodoData): Promise<TodoEntity> => {
     title,
     dueDate,
     description,
-    userId: user.uuid,
+    user,
   });
 
   await todoRepository.save(todo);
