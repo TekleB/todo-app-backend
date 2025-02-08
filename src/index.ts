@@ -5,7 +5,6 @@ import { authRouter } from "./routes/authRouter";
 import { todoRouter } from "./routes/todoRouter";
 import { errorHandlerMiddleware, routeMiddleware } from "./middlewares";
 import { Env } from "./env";
-import { clientUse } from "valid-ip-scope";
 
 const setupServer = async () => {
   await dbCreate();
@@ -16,7 +15,6 @@ const setupServer = async () => {
 
   app.use(cors());
   app.use(express.json());
-  app.use(clientUse());
   app.use(routeMiddleware);
   app.use("/health", (_req, res) => {
     res.json({ msg: "Hello Get Zell" });
