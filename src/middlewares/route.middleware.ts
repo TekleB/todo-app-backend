@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from "express";
 
 import { Logger } from "../utils";
 import { validateIp } from "../utils/validateIp";
-import { clientInspector } from "valid-ip-scope";
+import requestIp from "request-ip";
 
 export const routeMiddleware = async (
   req: Request,
@@ -11,7 +11,9 @@ export const routeMiddleware = async (
   next: NextFunction
 ) => {
   if (req.path !== "/health") {
-    const data = validateIp(req.ip) ? await clientInspector(req) : "Invalid IP";
+    const clientIp = requestIp.getClientIp(req) || "Unknown";
+    const data = validateIp(clientIp) ? { clientIp } : "Invalid IP";
+    
     Logger.group({
       title: "New Request",
       descriptions: [
