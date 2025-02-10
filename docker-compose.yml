@@ -1,0 +1,39 @@
+services:
+  # Node.js app service
+  app:
+    build: .
+    container_name: node-app
+    ports:
+      - "${NODE_LOCAL_PORT}:${NODE_DOCKER_PORT}"
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      DB_PORT: ${DB_DOCKER_PORT}
+      DB_TYPE: ${DB_TYPE}
+      SECRET_KEY: ${SECRET_KEY}
+      EXPIRE_TIME: ${EXPIRE_TIME}
+    depends_on:
+      - postgres-db
+    env_file:
+      - .env
+
+  # PostgreSQL database service
+  postgres-db:
+    image: postgres:latest
+    restart: unless-stopped
+    container_name: postgres-db
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "${DB_LOCAL_PORT}:${DB_DOCKER_PORT}"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
