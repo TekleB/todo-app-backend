@@ -4,7 +4,7 @@ services:
     image: postgres:latest
     restart: unless-stopped
     container_name: postgres-db
-    network_mode: host
+    # network_mode: host
     env_file:
       - .env
     environment:
@@ -35,7 +35,7 @@ services:
       - postgres-db
     env_file:
       - .env
-    network_mode: host
+    # network_mode: host
 
 volumes:
   postgres-data:
